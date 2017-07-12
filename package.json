@@ -1,0 +1,34 @@
+{
+  "name": "ChatVue",
+  "version": "0.0.1",
+  "description": "A basic Chat with Vue.js and Node.js, with express and socket.io",
+  "main": "main.js",
+  "scripts": {
+    "dev": "babel-node ./src/app.js",
+    "start": "node ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "Vue.js",
+    "vue",
+    "express",
+    "node.js",
+    "node",
+    "socket.io",
+    "sockets",
+    "es6",
+    "bootstrap"
+  ],
+  "author": "Fazt",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "socket.io": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}

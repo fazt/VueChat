@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ChatVue</title>
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!-- animate css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
+    <!-- Bootstrap Original Theme -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+|
+    <!-- Bootstrap Custom Theme -->
+    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="main.css">
+  </head>
+  <body>
+
+    <div id="app" class="container">
+      <div class="row">
+        <div class="col-md-4">
+
+          <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <span class="glyphicon glyphicon-user"></span>
+                Online ({{connectedUsers.length}})
+              </div>
+              <div class="panel-body">
+                <ul>
+                  <li v-for="user in connectedUsers">
+                    {{user}} &nbsp;
+                    <span
+                      v-if="userIsTyping(user)"
+                      style="display: inline"
+                      class="glyphicon glyphicon-pencil">
+                      <img
+                        style="width: 15%;"
+                        src="img/typing-indicator2.gif" alt="">
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <div class="panel panel-primary">
+              <div class="panel panel-heading">
+                ChatVue
+              </div>
+              <div class="panel-body">
+                This is a basi chat with Vue.js and Node.js
+                using the express and socket.io tools
+              </div>
+              <div class="panel-footer">
+                <button
+                v-show="!viewChatBox"
+                v-on:click="viewChatBox = !viewChatBox"
+                class="btn btn-info btn-lg">
+                Show Chat Box
+              </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div v-show="viewChatBox" class="col-md-8">
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <i class="fa fa-comments" aria-hidden="true"></i>
+              Let's Chat
+              <a v-on:click="viewChatBox = !viewChatBox" class="pull-right" style="color:red;">
+                <span class="glyphicon glyphicon-remove"></span>
+              </a>
+            </div>
+            <div class="panel-body">
+              <ul class="chat-list">
+                <li
+                  class="message animated fadeInUp"
+                  v-for="message in messages">
+                  <div class="alert alert-info" v-if="message.type == 'info'">
+                    {{ message.msg }}
+                  </div>
+
+                  <div v-if="message.type == 'chat'">
+                    <span class="pull-left">
+                      <img
+                        src="http://lorempixel.com/50/50/"
+                        alt="User Image Profile" />
+                    </span>
+                    <div class="">
+                      <div>
+                        <strong class="primary-font">
+                          {{message.user}}
+                        </strong>
+                        <span class="glyphicon glyphicon-time">
+                          &nbsp; {{ message.timestamp }}
+                        </span>
+                      </div>
+                      <p>
+                        {{ message.text }}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="panel-footer">
+              <form @submit.prevent="send">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                  </span>
+                  <input
+                    v-model="message.text"
+                    type="text"
+                    class="form-control"
+                    placeholder="Write your message"
+                    v-on:keyup="usersAreTyping"
+                    v-on:keyup.13="stoppedTyping('13')"
+                    v-on:keyup.8="stoppedTyping('8')"
+                    />
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- axios -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js" charset="utf-8"></script>
+    <!-- Socket.io -->
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8"></script>
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <!-- Logic UI -->
+    <script src="main.js" charset="utf-8"></script>
+  </body>
+</html>
