@@ -8,13 +8,11 @@
 
     <!-- animate css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css">
-    <!-- Bootstrap Original Theme -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-|
     <!-- Bootstrap Custom Theme -->
-    <link rel="stylesheet" href="https://bootswatch.com/paper/bootstrap.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
+
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
 
@@ -23,22 +21,20 @@
         <div class="col-md-4">
 
           <div class="col-md-12">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <span class="glyphicon glyphicon-user"></span>
+            <div class="card">
+              <div class="card-header text-white bg-primary">
+                <i class="fa fa-user"></i>
                 Online ({{connectedUsers.length}})
               </div>
-              <div class="panel-body">
-                <ul>
-                  <li v-for="user in connectedUsers">
+                <div class="card-body">
+                <ul class="list-group">
+                  <li v-for="user in connectedUsers" class="list-group-item">
                     {{user}} &nbsp;
                     <span
                       v-if="userIsTyping(user)"
                       style="display: inline"
-                      class="glyphicon glyphicon-pencil">
-                      <img
-                        style="width: 15%;"
-                        src="img/typing-indicator2.gif" alt="">
+                      class="fa fa-pencil">
+                      <img style="width: 15%;" src="img/typing-indicator2.gif" alt="">
                     </span>
                   </li>
                 </ul>
@@ -47,18 +43,20 @@
           </div>
 
           <div class="col-md-12">
-            <div class="panel panel-primary">
-              <div class="panel panel-heading">
-                ChatVue
+            <div class="card mt-2">
+              <div class="card-header bg-primary text-white">
+                <h3>ChatVue</h3>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 This is a basi chat with Vue.js and Node.js
                 using the express and socket.io tools
+                Username:
+                <input type="text" v-model="message.user" class="text-center">
               </div>
-              <div class="panel-footer">
+              <div class="card-footer">
                 <button
                 v-show="!viewChatBox"
-                v-on:click="viewChatBox = !viewChatBox"
+                @click="viewChatBox = !viewChatBox"
                 class="btn btn-info btn-lg">
                 Show Chat Box
               </button>
@@ -69,15 +67,15 @@
         </div>
 
         <div v-show="viewChatBox" class="col-md-8">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
               <i class="fa fa-comments" aria-hidden="true"></i>
               Let's Chat
               <a v-on:click="viewChatBox = !viewChatBox" class="pull-right" style="color:red;">
-                <span class="glyphicon glyphicon-remove"></span>
+                <i class="fa fa-close text-white"></i>
               </a>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
               <ul class="chat-list">
                 <li
                   class="message animated fadeInUp"
@@ -86,30 +84,26 @@
                     {{ message.msg }}
                   </div>
 
-                  <div v-if="message.type == 'chat'">
-                    <span class="pull-left">
-                      <img
-                        src="http://lorempixel.com/50/50/"
-                        alt="User Image Profile" />
-                    </span>
-                    <div class="">
-                      <div>
-                        <strong class="primary-font">
-                          {{message.user}}
-                        </strong>
-                        <span class="glyphicon glyphicon-time">
-                          &nbsp; {{ message.timestamp }}
-                        </span>
-                      </div>
-                      <p>
-                        {{ message.text }}
-                      </p>
+                  <div v-if="message.type == 'chat'" class="p-2">
+                    <img class="float-left"
+                    src="http://lorempixel.com/50/50/"
+                    alt="User Image Profile" />
+                    <div>
+                      <strong class="primary-font">
+                        {{message.user}}
+                      </strong>
+                      <span class="glyphicon glyphicon-time">
+                        &nbsp; {{ message.timestamp }}
+                      </span>
                     </div>
+                    <p>
+                      {{ message.text }}
+                    </p>
                   </div>
                 </li>
               </ul>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
               <form @submit.prevent="send">
                 <div class="input-group">
                   <span class="input-group-addon">
@@ -123,6 +117,7 @@
                     v-on:keyup="usersAreTyping"
                     v-on:keyup.13="stoppedTyping('13')"
                     v-on:keyup.8="stoppedTyping('8')"
+                    autofocus
                     />
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-primary">
@@ -140,14 +135,17 @@
 
     <!-- axios -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js" charset="utf-8"></script>
+
     <!-- Socket.io -->
     <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+
     <!-- Moment.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" charset="utf-8"></script>
+
     <!-- Vue.js -->
     <script src="https://unpkg.com/vue"></script>
 
     <!-- Logic UI -->
-    <script src="main.js" charset="utf-8"></script>
+    <script src="/js/main.js" charset="utf-8"></script>
   </body>
 </html>

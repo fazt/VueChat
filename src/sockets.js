@@ -32,7 +32,6 @@ export default io => {
       socket.broadcast.emit('user left', socket.id);
     });
 
-
   });
 
 }

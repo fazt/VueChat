@@ -15,8 +15,8 @@
 ## FrontEnd Tools
   - Vue.js
   - Font Awesome
-  - Bootstrap3
-    - [Bootswatch - Paper Theme](https://bootswatch.com/paper/bootstrap.min.css)
+  - Bootstrap4
+    - [Bootswatch](https://bootswatch.com/)
   - [uiGradients](https://uigradients.com)
   - Placeholder Images
     - [LoremPixel](http://lorempixel.com/)
@@ -26,7 +26,7 @@
 ## What is Next?
 - move all dependencies to npm with webpack
 - use a real avatar image
-- save messages on a databse
-- multiple chat room
+- save messages on a database
+- multiple chat rooms
 - private messages
 - emojis
