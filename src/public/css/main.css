@@ -1,21 +1,22 @@
 body {
   padding: 20px;
-  background: #0B486B;  /* fallback for old browsers */  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(left, #F56217, #0B486B);
-  background: -o-linear-gradient(left, #F56217, #0B486B);
-  background: linear-gradient(to right, #F56217, #0B486B); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #343434;
 }
 
 .chat-list {
   overflow-y: scroll;
-  height: 400px;
+  height: 700px;
+  padding: 0;
+}
+
+.chat-list::-webkit-scrollbar {
+  display: none;
 }
 
 .message {
-  margin-bottom: 10px;
   list-style: none;
 }
 
 .message img {
-  padding-right: 20px;
+  padding: 10px;
 }

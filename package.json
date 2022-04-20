@@ -1,11 +1,12 @@
 {
-  "name": "ChatVue",
-  "version": "0.0.1",
+  "name": "vuechat",
+  "version": "0.0.2",
   "description": "A basic Chat with Vue.js and Node.js, with express and socket.io",
-  "main": "main.js",
+  "main": "src/index.js",
+  "type": "module",
   "scripts": {
-    "dev": "babel-node ./src/app.js",
-    "start": "node ./src/app.js"
+    "dev": "nodemon ./src/index.js --ignore src/public",
+    "start": "node ./src/index.js"
   },
   "keywords": [
     "chat",
@@ -22,12 +23,11 @@
   "author": "Fazt",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
-    "morgan": "^1.9.0",
-    "socket.io": "^2.0.4"
+    "express": "^4.17.3",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.4.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "nodemon": "^2.0.15"
   }
 }

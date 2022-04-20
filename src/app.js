@@ -1,39 +1,20 @@
-import http from 'http'
-import path from 'path'
+import express from "express";
+import morgan from "morgan";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
 
-import express from 'express'
-import morgan from 'morgan'
-import socketIo from 'socket.io'
-
-const app = express()
-const server = http.createServer(app)
-const io = socketIo.listen(server)
-
-import sockets from './sockets'
-
-// configurations
-app.set('port', process.env.PORT || 3000)
+const app = express();
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // middlewares
-app.use(morgan('dev'))
+app.use(morgan("dev"));
 
-// routes
-app.get('/', (req, res) => {
-  const indexPath = path.join(__dirname, 'public/index.html')
-  res.sendFile(indexPath)
-})
-
-app.get('/onlineusers', (req, res) => {
-  res.send(io.sockets.adapter.rooms)
-})
+app.get("/onlineusers", (req, res) => {
+  console.log([...app.get("io").sockets.adapter.rooms.keys()]);
+  res.send([...(app.get("io").sockets.adapter.rooms.keys())]);
+});
 
 // static files
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(join(__dirname, "public")));
 
-// sockets
-sockets(io)
-
-// bootstraping the app
-server.listen(app.get('port'), () => {
-  console.log(`server on port ${app.get('port')}`)
-})
+export default app;
