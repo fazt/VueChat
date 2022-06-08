@@ -1,5 +1,7 @@
 ## ChatVue
 
+this is a web application using Websocket with VUe
+
 ![](docs/Screenshot-v0.0.1.png)
 
 ## Tutorial
